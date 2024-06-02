@@ -27,8 +27,8 @@
                                     <input type="hidden" id="id" name="id" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="nombre">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" required>
+                                    <label for="name">Nombre</label>
+                                    <input type="text" id="name" name="name" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="dni">DNI</label>

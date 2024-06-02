@@ -20,6 +20,11 @@
     background-color: rgb(185, 114, 6);
 }
 
+.menu-head a {
+    text-decoration: none;
+    color: black;
+}
+
 .menu-head h1 {
     padding: 15px;
     font-weight: 800;

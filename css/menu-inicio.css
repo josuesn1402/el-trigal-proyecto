@@ -21,6 +21,7 @@ section {
     padding: 50px;
     border-radius: 15px;
     color: white;
+    margin: 50px;
 }
 
 h1 {
@@ -35,7 +36,7 @@ span {
     font-size: 30px;
 }
 
-p {
+.inicio-container p {
     font-weight: 400;
     margin: 10px 0;
 }

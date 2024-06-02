@@ -19,6 +19,10 @@
         <div class="productos-container">
             <form action="submit_product.php" method="POST">
                 <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="hidden" id="id" name="id" required>
+                </div>
+                <div class="form-group">
                     <label for="departamento">Turno</label>
                     <select id="departamento" name="departamento" required>
                         <option value="">Seleccione un producto</option>

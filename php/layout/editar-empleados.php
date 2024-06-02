@@ -23,8 +23,12 @@
                         <div class="empleados">
                             <div class="empleados-left">
                                 <div class="form-group">
-                                    <label for="name">Nombre</label>
-                                    <input type="text" id="name" name="name" required>
+                                    <label for="id">ID</label>
+                                    <input type="hidden" id="id" name="id" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input type="text" id="nombre" name="nombre" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="dni">DNI</label>

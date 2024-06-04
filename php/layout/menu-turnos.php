@@ -2,7 +2,7 @@
 // Archivo: list_productos.php
 
 // Incluir archivo de conexión
-include('../config/connection.php');
+include ('../config/connection.php');
 
 // Consulta para obtener datos de la tabla Producto
 $query = "SELECT id, Entrada, Salida FROM Turno";
@@ -21,7 +21,9 @@ $result = $conn->query($query);
   <link rel="stylesheet" href="../../css/menu-turnos.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -60,7 +62,7 @@ $result = $conn->query($query);
               echo "<td>" . $row['id'] . "</td>";
               echo "<td>" . $row['Entrada'] . "</td>";
               echo "<td>" . $row['Salida'] . "</td>";
-              echo "<td><a class='btn-editar' href='../layout/editar-producto.php?id=" . $row['id'] . "'>✏️</a></td>";
+              echo "<td><a class='btn-editar' href='editar-turnos.php?id=" . $row['id'] . "'>✏️</a></td>";
               echo "</tr>";
             }
           } else {

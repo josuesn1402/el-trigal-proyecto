@@ -5,7 +5,7 @@
 include ('../config/connection.php');
 
 // Consulta para obtener datos de la tabla Rol
-$query = "SELECT id, descripcion FROM Rol";
+$query = "CALL ListarRoles()";
 $result = $conn->query($query);
 
 ?>

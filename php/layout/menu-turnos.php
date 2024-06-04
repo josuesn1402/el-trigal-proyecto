@@ -5,7 +5,7 @@
 include ('../config/connection.php');
 
 // Consulta para obtener datos de la tabla Producto
-$query = "SELECT id, Entrada, Salida FROM Turno";
+$query = "CALL ListarTurno()";
 $result = $conn->query($query);
 
 ?>

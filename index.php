@@ -36,7 +36,6 @@
       </form>
 
       <?php
-      // Verificar si hay un mensaje de error
       if (isset($_GET['error']) && $_GET['error'] === 'credenciales') {
         echo "<p style='margin: 0;color: red; text-align: center; font-size: 14px; width: 75%;'>Las credenciales son incorrectas. Por favor, intenta nuevamente.</p>";
       }

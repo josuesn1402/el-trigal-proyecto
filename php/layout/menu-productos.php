@@ -2,10 +2,10 @@
 // Archivo: list_productos.php
 
 // Incluir archivo de conexión
-include('../config/connection.php');
+include ('../config/connection.php');
 
 // Consulta para obtener datos de la tabla Producto
-$query = "SELECT id_producto, nombre_producto, cantidad, descripcion, estado, Precio FROM Producto";
+$query = "CALL ListarProducto()";
 $result = $conn->query($query);
 
 ?>
@@ -21,7 +21,9 @@ $result = $conn->query($query);
   <link rel="stylesheet" href="../../css/menu-productos.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -29,7 +31,7 @@ $result = $conn->query($query);
   <section>
     <h2>Registro de Productos</h2>
     <div class="productos-container">
-      <form action="submit_product.php" method="POST">
+      <form action="../controllers/productosCtrl/registrarCtrl.php" method="POST">
         <div class="form-group">
           <label for="nombre">Nombre del Producto</label>
           <input type="text" id="nombre" name="nombre" required>
@@ -41,6 +43,13 @@ $result = $conn->query($query);
         <div class="form-group">
           <label for="descripcion">Descripcion</label>
           <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" name="estado" required>
+            <option value="BUENO" selected>BUENO</option>
+            <option value="DEFECTUOSO">DEFECTUOSO</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="price">Precio</label>
@@ -75,7 +84,7 @@ $result = $conn->query($query);
               echo "<td>" . $row['descripcion'] . "</td>";
               echo "<td>" . $row['estado'] . "</td>";
               echo "<td>" . $row['Precio'] . "</td>";
-              echo "<td><a class='btn-editar' href='../layout/editar-producto.php?id=" . $row['id_producto'] . "'>✏️</a></td>";
+              echo "<td><a class='btn-editar' href='../layout/editar-productos.php?id=" . $row['id_producto'] . "'>✏️</a></td>";
               echo "</tr>";
             }
           } else {

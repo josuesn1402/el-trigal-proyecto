@@ -15,30 +15,34 @@
 </head>
 
 <body>
-  <?php include '../components/menu.php' ?>
-  <section>
-    <h2>Editar Productos</h2>
-    <div class="productos-container">
-      <form action="submit_product.php" method="POST">
-        <div class="form-group">
-          <label for="nombre">Nombre del Producto</label>
-          <input type="text" id="nombre" name="nombre" required>
+    <?php include '../components/menu.php' ?>
+    <section>
+        <h2>Editar Productos</h2>
+        <div class="productos-container">
+            <form action="submit_product.php" method="POST">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="hidden" id="id" name="id" required>
+                </div>
+                <div class="form-group">
+                    <label for="nombre">Nombre del Producto</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock">Cantidad</label>
+                    <input type="number" id="stock" name="stock" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion">Descripcion</label>
+                    <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price">Precio</label>
+                    <input type="number" id="price" name="price" min="0.01" step="0.01" required>
+                </div>
+                <button type="submit">Actualizar Producto</button>
+            </form>
         </div>
-        <div class="form-group">
-          <label for="stock">Cantidad</label>
-          <input type="number" id="stock" name="stock" min="0" required>
-        </div>
-        <div class="form-group">
-          <label for="descripcion">Descripcion</label>
-          <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="price">Precio</label>
-          <input type="number" id="price" name="price" min="0.01" step="0.01" required>
-        </div>
-        <button type="submit">Actualizar Producto</button>
-      </form>
-    </div>
   </section>
 </body>
 

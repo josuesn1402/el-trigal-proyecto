@@ -15,14 +15,21 @@
 </head>
 
 <body>
-  <?php include '../components/menu.php' ?>
-  <section>
-    <h2>Editar Roles</h2>
-    <div class="productos-container">
-      <form action="submit_product.php" method="POST">
-        <div class="form-group">
-          <label for="rol">Descripcion</label>
-          <input type="text" id="rol" name="rol" required>
+    <?php include '../components/menu.php' ?>
+    <section>
+        <h2>Editar Roles</h2>
+        <div class="productos-container">
+            <form action="submit_product.php" method="POST">
+                <div class="form-group">
+                    <label for="id">ID</label>
+                    <input type="hidden" id="id" name="id" required>
+                </div>
+                <div class="form-group">
+                    <label for="rol">Descripcion</label>
+                    <input type="text" id="rol" name="rol" required>
+                </div>
+                <button type="submit">Actualizar Rol</button>
+            </form>
         </div>
         <button type="submit">Actualizar Rol</button>
       </form>

@@ -29,14 +29,13 @@
           <p>Bienvenido</p>
         </div>
         <input type="text" placeholder="Usuario" id="username" name="username">
-        <input type="password" placeholder="Contraseña" id="password" name="contrasena">
+        <input type="password" placeholder="Contraseña" id="password" name="password">
         <div class="form-buttons">
           <button class="form-login" type="submit">INGRESAR</button>
         </div>
       </form>
 
       <?php
-      // Verificar si hay un mensaje de error
       if (isset($_GET['error']) && $_GET['error'] === 'credenciales') {
         echo "<p style='margin: 0;color: red; text-align: center; font-size: 14px; width: 75%;'>Las credenciales son incorrectas. Por favor, intenta nuevamente.</p>";
       }

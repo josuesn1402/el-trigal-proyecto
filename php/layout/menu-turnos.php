@@ -1,3 +1,15 @@
+<?php
+// Archivo: list_productos.php
+
+// Incluir archivo de conexión
+include('../config/connection.php');
+
+// Consulta para obtener datos de la tabla Producto
+$query = "SELECT id, Entrada, Salida FROM Turno";
+$result = $conn->query($query);
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,9 +21,7 @@
   <link rel="stylesheet" href="../../css/menu-turnos.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -36,57 +46,30 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo Electrónico</th>
-            <th>Fecha de Registro</th>
+            <th>Entrada</th>
+            <th>Salida</th>
             <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Juan Pérez</td>
-            <td>juan.perez@example.com</td>
-            <td>2024-01-01</td>
-            <td><a class="btn-editar" href="../layout/editar-turnos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-turnos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-turnos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-turnos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-turnos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-turnos.php">✏️</a></td>
-          </tr>
+          <?php
+          if ($result->num_rows > 0) {
+            // Recorrer y mostrar los datos
+            while ($row = $result->fetch_assoc()) {
+              echo "<tr>";
+              echo "<td>" . $row['id'] . "</td>";
+              echo "<td>" . $row['Entrada'] . "</td>";
+              echo "<td>" . $row['Salida'] . "</td>";
+              echo "<td><a class='btn-editar' href='../layout/editar-producto.php?id=" . $row['id'] . "'>✏️</a></td>";
+              echo "</tr>";
+            }
+          } else {
+            echo "<tr><td colspan='7'>No hay datos disponibles</td></tr>";
+          }
+          // Cerrar conexión
+          $conn->close();
+          ?>
         </tbody>
-      </table>
     </div>
   </section>
 </body>

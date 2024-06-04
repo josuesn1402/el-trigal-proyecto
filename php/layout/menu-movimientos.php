@@ -1,3 +1,27 @@
+<?php
+// Archivo: list_movimientos.php
+
+// Incluir archivo de conexión
+include('../config/connection.php');
+
+// Consulta para obtener datos de la tabla Movimiento con los nombres correspondientes
+$query = "
+SELECT
+  Movimiento.id_recepcion,
+  Producto.nombre_producto,
+  Personal.nombre AS nombre_personal,
+  Movimiento.tipo_movimiento,
+  Movimiento.estado,
+  Movimiento.fecha,
+  Movimiento.descuento
+FROM
+  Movimiento
+JOIN Producto ON Movimiento.id_producto = Producto.id_producto
+JOIN Personal ON Movimiento.id_personal = Personal.id_personal
+";
+$result = $conn->query($query);
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,9 +33,7 @@
   <link rel="stylesheet" href="../../css/menu-movimientos.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -62,55 +84,38 @@
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Correo Electrónico</th>
-            <th>Fecha de Registro</th>
+            <th>Producto</th>
+            <th>Personal</th>
+            <th>Tipo de Movimiento</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Descuento</th>
             <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Juan Pérez</td>
-            <td>juan.perez@example.com</td>
-            <td>2024-01-01</td>
-            <td><a class="btn-editar" href="../layout/editar-movimientos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-movimientos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-movimientos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-movimientos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-movimientos.php">✏️</a></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>María García</td>
-            <td>maria.garcia@example.com</td>
-            <td>2024-02-01</td>
-            <td><a class="btn-editar" href="../layout/editar-movimientos.php">✏️</a></td>
-          </tr>
+          <?php
+          // Verificar si hay resultados
+          if ($result->num_rows > 0) {
+            // Recorrer y mostrar los datos
+            while ($row = $result->fetch_assoc()) {
+              echo "<tr>";
+              echo "<td>" . $row['id_recepcion'] . "</td>";
+              echo "<td>" . $row['nombre_producto'] . "</td>";
+              echo "<td>" . $row['nombre_personal'] . "</td>";
+              echo "<td>" . $row['tipo_movimiento'] . "</td>";
+              echo "<td>" . $row['estado'] . "</td>";
+              echo "<td>" . $row['fecha'] . "</td>";
+              echo "<td>" . $row['descuento'] . "</td>";
+              echo "<td><a class='btn-editar' href='../layout/editar-movimientos.php?id=" . $row['id_recepcion'] . "'>✏️</a></td>";
+              echo "</tr>";
+            }
+          } else {
+            echo "<tr><td colspan='8'>No hay datos disponibles</td></tr>";
+          }
+          // Cerrar conexión
+          $conn->close();
+          ?>
         </tbody>
       </table>
     </div>

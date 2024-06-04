@@ -28,8 +28,8 @@
           <h1>¡Hola de nuevo!</h1>
           <p>Bienvenido</p>
         </div>
-        <input type="text" placeholder="Usuario" id="username" name="username">
-        <input type="password" placeholder="Contraseña" id="password" name="password">
+        <input type="text" placeholder="Usuario" id="user" name="username">
+        <input type="password" placeholder="Contraseña" id="pass" name="password">
         <div class="form-buttons">
           <button class="form-login" type="submit">INGRESAR</button>
         </div>

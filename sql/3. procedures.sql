@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS Almacenamiento;
-
 USE Almacenamiento;
 
 -- Eliminar procedimientos existentes
@@ -21,6 +19,10 @@ DROP PROCEDURE IF EXISTS CrearProducto;
 DROP PROCEDURE IF EXISTS EditarProducto;
 DROP PROCEDURE IF EXISTS ConsultarProducto;
 DROP PROCEDURE IF EXISTS ListarProducto;
+DROP PROCEDURE IF EXISTS CrearRol;
+DROP PROCEDURE IF EXISTS EditarRol;
+DROP PROCEDURE IF EXISTS ConsultarRol;
+DROP PROCEDURE IF EXISTS ListarRoles;
 
 -- Procedimientos para Personal
 DELIMITER //
@@ -244,3 +246,41 @@ BEGIN
   SELECT * FROM Producto;
 END //
 DELIMITER ;
+
+-- Procedimientos para Roles
+DELIMITER //
+CREATE PROCEDURE CrearRol (
+  IN p_nombre_rol VARCHAR(50)
+)
+BEGIN
+  INSERT INTO Rol (descripcion)
+  VALUES (p_nombre_rol);
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE EditarRol (
+  IN p_id_rol INT,
+  IN p_nombre_rol VARCHAR(50)
+)
+BEGIN
+  UPDATE Rol
+  SET descripcion = p_nombre_rol
+  WHERE id = p_id_rol;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE ConsultarRol (IN p_id_rol INT)
+BEGIN
+  SELECT * FROM Rol WHERE id = p_id_rol;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE ListarRoles ()
+BEGIN
+  SELECT * FROM Rol;
+END //
+DELIMITER ;
+

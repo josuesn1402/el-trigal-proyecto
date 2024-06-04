@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: ../layout/menu-inicio.php");
     exit;
   } else {
-    header("Location: ../index.php?error=credenciales");
+    header("Location: ../../index.php?error=credenciales");
     exit;
   }
 }

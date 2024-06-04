@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "dashboardDB";
+$database = "Almacenamiento";
 
 // Crear la conexión
 $conn = new mysqli($servername, $username, $password, $database);

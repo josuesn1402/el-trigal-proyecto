@@ -25,13 +25,13 @@
     <div class="login-right">
       <form action="php/acceso.php" method="POST">
         <div class="form-title">
-          <h1>Hello Again!</h1>
-          <p>Welcome Back</p>
+          <h1>¡Hola de nuevo!</h1>
+          <p>Bienvenido</p>
         </div>
-        <input type="text" placeholder="Username" id="user" name="username">
-        <input type="password" placeholder="Password" id="pass" name="contrasena">
+        <input type="text" placeholder="Usuario" id="user" name="username">
+        <input type="password" placeholder="Contraseña" id="pass" name="contrasena">
         <div class="form-buttons">
-          <button class="form-login" type="submit">Login</button>
+          <button class="form-login" type="submit">INGRESAR</button>
         </div>
       </form>
 

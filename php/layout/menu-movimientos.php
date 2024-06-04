@@ -11,6 +11,7 @@ SELECT
   Producto.nombre_producto,
   CONCAT(Personal.nombre, ' ', Personal.apellidos) AS nombre_personal,
   Movimiento.tipo_movimiento,
+  Movimiento.cantidad,
   Movimiento.estado,
   Movimiento.fecha,
   Movimiento.descuento
@@ -18,6 +19,7 @@ FROM
   Movimiento
 JOIN Producto ON Movimiento.id_producto = Producto.id_producto
 JOIN Personal ON Movimiento.id_personal = Personal.id_personal
+ORDER BY Movimiento.fecha DESC
 ";
 $result = $conn->query($query);
 
@@ -51,10 +53,10 @@ $result_empleados = $conn->query($query_empleados);
   <section>
     <h2>Registro de Movimientos</h2>
     <div class="productos-container">
-      <form action="../controllers/movimientosCtrl/registrarCtrl.php" method="POST">
+      <form id="movimientoForm" action="../controllers/movimientosCtrl/registrarCtrl.php" method="POST">
         <div class="form-group">
           <label for="producto">Producto</label>
-          <select id="producto" name="producto" required>
+          <select id="producto" name="producto" required onchange="mostrarCantidadDisponible()">
             <option value="">Seleccione un producto</option>
             <?php
             if ($result_productos->num_rows > 0) {
@@ -64,6 +66,10 @@ $result_empleados = $conn->query($query_empleados);
             }
             ?>
           </select>
+        </div>
+        <div class="form-group">
+          <label for="cantidad_producto">Cantidad disponible del producto</label>
+          <input type="number" id="cantidad_producto" name="cantidad_producto" min="1" step="1" disabled>
         </div>
         <div class="form-group">
           <label for="empleado">Empleado</label>
@@ -87,6 +93,10 @@ $result_empleados = $conn->query($query_empleados);
           </select>
         </div>
         <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" id="cantidad" name="cantidad" min="1" step="1" required>
+        </div>
+        <div class="form-group">
           <label for="estado">Estado</label>
           <select id="estado" name="estado" required>
             <option value="BUENO">BUENO</option>
@@ -99,9 +109,9 @@ $result_empleados = $conn->query($query_empleados);
         </div>
         <div class="form-group">
           <label for="descuento">Descuento</label>
-          <input type="number" id="descuento" name="descuento" min="0.01" step="0.01" required>
+          <input type="number" id="descuento" name="descuento" min="0" step="0.50" value="0" required>
         </div>
-        <button type="submit">Guardar Movimiento</button>
+        <button type="submit" onclick="validarCantidad()">Guardar Movimiento</button>
       </form>
     </div>
     <div class="table-container">
@@ -112,6 +122,7 @@ $result_empleados = $conn->query($query_empleados);
             <th>Producto</th>
             <th>Personal</th>
             <th>Tipo de Movimiento</th>
+            <th>Cantidad</th>
             <th>Estado</th>
             <th>Fecha</th>
             <th>Descuento</th>
@@ -129,6 +140,7 @@ $result_empleados = $conn->query($query_empleados);
               echo "<td>" . $row['nombre_producto'] . "</td>";
               echo "<td>" . $row['nombre_personal'] . "</td>";
               echo "<td>" . $row['tipo_movimiento'] . "</td>";
+              echo "<td>" . $row['cantidad'] . "</td>";
               echo "<td>" . $row['estado'] . "</td>";
               echo "<td>" . $row['fecha'] . "</td>";
               echo "<td>" . $row['descuento'] . "</td>";
@@ -145,6 +157,50 @@ $result_empleados = $conn->query($query_empleados);
       </table>
     </div>
   </section>
+
+  <script>
+    function validarCantidad() {
+      var tipoMovimiento = document.getElementById('tipo_movimiento').value;
+
+      // Si el tipo de movimiento es "SALIDA", entonces valida la cantidad disponible
+      if (tipoMovimiento === 'SALIDA') {
+        var cantidad = document.getElementById('cantidad').value;
+        var cantidadDisponible = document.getElementById('cantidad_producto').value;
+
+        if (cantidad === '') {
+          alert('Por favor, ingresa una cantidad.');
+          return false;
+        }
+
+        if (parseInt(cantidad) > parseInt(cantidadDisponible)) {
+          alert('La cantidad seleccionada es mayor que la cantidad disponible del producto.');
+          return false;
+        }
+      }
+
+      return true; // Si todo está bien o si el tipo de movimiento es "ENTRADA", retorna true para enviar el formulario
+    }
+
+    function mostrarCantidadDisponible() {
+      var productoSeleccionado = document.getElementById('producto').value;
+
+      // Realizar una solicitud AJAX para obtener la cantidad disponible del producto
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var cantidadDisponible = xhr.responseText;
+            document.getElementById('cantidad_producto').value = cantidadDisponible;
+          } else {
+            alert('No se pudo enviar la solicitud. Inténtalo de nuevo más tarde.');
+          }
+        }
+      };
+      xhr.open('GET', '../controllers/movimientosCtrl/obtenerCantidadDisponible.php?producto=' + productoSeleccionado, true);
+      xhr.send();
+    }
+  </script>
+
 </body>
 
 </html>

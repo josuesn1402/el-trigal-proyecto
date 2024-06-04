@@ -27,5 +27,5 @@ SELECT
     Personal p
     INNER JOIN Usuario u ON p.id_usuario = u.id
   WHERE
-    p.id_personal = 4;
+    p.id_personal = 1;
 

@@ -151,16 +151,17 @@ CREATE PROCEDURE CrearMovimiento (
   IN p_id_producto INT,
   IN p_id_personal INT,
   IN p_tipo_movimiento VARCHAR(20),
+  IN p_cantidad INT,
   IN p_estado VARCHAR(20),
   IN p_fecha DATE,
   IN p_descuento INT
 )
 BEGIN
   INSERT INTO Movimiento (
-    id_producto, id_personal, tipo_movimiento, estado, fecha, descuento
+    id_producto, id_personal, tipo_movimiento, cantidad, estado, fecha, descuento
   )
   VALUES (
-    p_id_producto, p_id_personal, p_tipo_movimiento, p_estado, p_fecha, p_descuento
+    p_id_producto, p_id_personal, p_tipo_movimiento, p_cantidad, p_estado, p_fecha, p_descuento
   );
 END //
 DELIMITER ;

@@ -59,6 +59,7 @@ CREATE TABLE Movimiento (
     id_producto INT,
     id_personal INT,
     tipo_movimiento VARCHAR(20),
+    cantidad INT,
     estado VARCHAR(20),
     fecha DATE,
     descuento INT,

@@ -8,6 +8,7 @@ DROP PROCEDURE IF EXISTS EditarPersonal;
 DROP PROCEDURE IF EXISTS ListarPersonal;
 DROP PROCEDURE IF EXISTS ConsultarPersonal;
 DROP PROCEDURE IF EXISTS ListarTurno;
+DROP PROCEDURE IF EXISTS CrearTurno;
 DROP PROCEDURE IF EXISTS EditarTurno;
 DROP PROCEDURE IF EXISTS ConsultarTurno;
 DROP PROCEDURE IF EXISTS CrearUsuario;
@@ -87,6 +88,17 @@ DELIMITER //
 CREATE PROCEDURE ListarTurno ()
 BEGIN
   SELECT * FROM Turno;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CrearTurno (
+  IN p_entrada TIME,
+  IN p_salida TIME
+)
+BEGIN
+  INSERT INTO Turno (Entrada, Salida)
+  VALUES (p_entrada, p_salida);
 END //
 DELIMITER ;
 

@@ -19,7 +19,7 @@
   <section>
     <h2>Registro de Turnos</h2>
     <div class="productos-container">
-      <form action="submit_product.php" method="POST">
+      <form action="../controllers/turnosCtrl/registrarCtrl.php" method="POST">
         <div class="form-group">
           <label for="entrada">Entrada</label>
           <input type="time" id="entrada" name="entrada" required>

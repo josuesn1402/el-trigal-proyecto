@@ -23,13 +23,13 @@
       <img src="assets/trigal-login.png" alt="">
     </div>
     <div class="login-right">
-      <form action="php/acceso.php" method="POST">
+      <form action="php/controllers/loginController.php" method="POST">
         <div class="form-title">
           <h1>¡Hola de nuevo!</h1>
           <p>Bienvenido</p>
         </div>
-        <input type="text" placeholder="Usuario" id="user" name="username">
-        <input type="password" placeholder="Contraseña" id="pass" name="contrasena">
+        <input type="text" placeholder="Usuario" id="username" name="username">
+        <input type="password" placeholder="Contraseña" id="password" name="contrasena">
         <div class="form-buttons">
           <button class="form-login" type="submit">INGRESAR</button>
         </div>

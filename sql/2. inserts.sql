@@ -3,8 +3,8 @@ INSERT INTO
   Usuario (username, contrasenia, correo, admin)
 VALUES
   (
-    'usuario1',
-    'contraseña1',
+    'user1',
+    '1234',
     'usuario1@example.com',
     0
   );

@@ -1,3 +1,7 @@
-php/config/connection.php
 *connection.*
 connection.php
+connection.*
+php/config/connection.php
+/php/config/connection.php
+./php/config/connection.php
+config/connection.php

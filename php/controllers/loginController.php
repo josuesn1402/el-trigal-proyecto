@@ -8,15 +8,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $password = $_POST['password'];
 
   // Validación de los datos y autenticación
-  $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
+  $query = "SELECT * FROM Usuario WHERE username = '$username' AND contrasenia = '$password'";
   $result = mysqli_query($conn, $query);
 
   if (mysqli_num_rows($result) == 1) {
     $_SESSION['username'] = $username;
-    header("Location: ../layout/dashboard.php");
+    header("Location: ../layout/menu-inicio.php");
     exit;
   } else {
-    echo "Nombre de usuario o contraseña incorrectos.";
+    header("Location: ../index.php?error=credenciales");
+    exit;
   }
 }
 ?>

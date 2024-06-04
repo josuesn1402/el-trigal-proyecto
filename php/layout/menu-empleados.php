@@ -2,12 +2,19 @@
 // Archivo: list_personal.php
 
 // Incluir archivo de conexión
-include('../config/connection.php');
+include ('../config/connection.php');
 
 // Consulta para obtener datos de la tabla Personal
-$query = "SELECT id_personal, nombre, correo, fecha_ingreso FROM Personal";
+$query = "SELECT * FROM Personal";
 $result = $conn->query($query);
 
+// Consulta para obtener roles desde la base de datos
+$query_roles = "SELECT * FROM Rol";
+$result_roles = $conn->query($query_roles);
+
+// Consulta para obtener turnos desde la base de datos
+$query_turnos = "SELECT * FROM Turno";
+$result_turnos = $conn->query($query_turnos);
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +28,9 @@ $result = $conn->query($query);
   <link rel="stylesheet" href="../../css/menu-empleados.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -30,7 +39,7 @@ $result = $conn->query($query);
     <div class="empleados-container">
       <h2>Registro de Empleado</h2>
       <div class="empleados-form">
-        <form action="submit_form.php" method="POST">
+        <form action="../controllers/empledosCtrl/registrarCtrl.php" method="POST">
           <div class="form-container">
             <div class="empleados">
               <div class="empleados-left">
@@ -47,14 +56,18 @@ $result = $conn->query($query);
                   <input type="date" id="fecha" name="fecha" required>
                 </div>
                 <div class="form-group">
-                  <label for="pais">Rol</label>
-                  <select id="pais" name="pais" required>
+                  <label for="rol">Rol</label>
+                  <select id="rol" name="rol" required>
                     <option value="">Seleccione un rol</option>
-                    <option value="argentina">Argentina</option>
-                    <option value="brasil">Brasil</option>
-                    <option value="chile">Chile</option>
-                    <option value="mexico">México</option>
-                    <option value="peru">Perú</option>
+                    <?php
+                    // Verificar si hay resultados en la consulta de roles
+                    if ($result_roles->num_rows > 0) {
+                      // Recorrer y mostrar los datos de roles
+                      while ($row_rol = $result_roles->fetch_assoc()) {
+                        echo "<option value='" . $row_rol['id'] . "'>" . $row_rol['descripcion'] . "</option>";
+                      }
+                    }
+                    ?>
                   </select>
                 </div>
               </div>
@@ -72,14 +85,18 @@ $result = $conn->query($query);
                   <input type="number" min="1" id="sueldo" name="sueldo" required>
                 </div>
                 <div class="form-group">
-                  <label for="departamento">Turno</label>
-                  <select id="departamento" name="departamento" required>
-                    <option value="">Seleccione un departamento</option>
-                    <option value="ventas">Ventas</option>
-                    <option value="marketing">Marketing</option>
-                    <option value="rrhh">Recursos Humanos</option>
-                    <option value="it">IT</option>
-                    <option value="finanzas">Finanzas</option>
+                  <label for="turno">Turno</label>
+                  <select id="turno" name="turno" required>
+                    <option value="">Seleccione un turno</option>
+                    <?php
+                    // Verificar si hay resultados en la consulta de turnos
+                    if ($result_turnos->num_rows > 0) {
+                      // Recorrer y mostrar los datos de turnos
+                      while ($row_turno = $result_turnos->fetch_assoc()) {
+                        echo "<option value='" . $row_turno['id'] . "'>" . $row_turno['Entrada'] . " - " . $row_turno['Salida'] . "</option>";
+                      }
+                    }
+                    ?>
                   </select>
                 </div>
               </div>

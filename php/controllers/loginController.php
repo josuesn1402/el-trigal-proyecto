@@ -6,7 +6,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = $_POST['username'];
   $password = $_POST['password'];
 
-  // Validación de los datos y autenticación con consultas preparadas
   $query = $conn->prepare("SELECT * FROM Usuario WHERE username = ? AND contrasenia = ?");
   $query->bind_param("ss", $username, $password);
   $query->execute();

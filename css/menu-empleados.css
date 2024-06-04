@@ -1,88 +1,88 @@
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: #ffeecc;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	background: #ffeecc;
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	font-style: normal;
 }
 
 section {
-    margin-left: 200px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	margin-left: 200px;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .empleados-container {
-    width: 80%;
-    color: white;
-    margin: 30px;
+	width: 80%;
+	color: white;
+	margin: 30px;
 }
 
 .empleados-form {
-    width: 90%;
-    min-width: 300px;
+	width: 90%;
+	min-width: 300px;
 }
 
 .form-container {
-    display: flex;
-    gap: 50px;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	gap: 50px;
+	justify-content: center;
+	align-items: center;
 }
 
 .empleados-container h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: black;
-    font-weight: 700;
+	text-align: center;
+	margin-bottom: 20px;
+	color: black;
+	font-weight: 700;
 }
 
 .empleados {
-    display: flex;
-    gap: 30px;
-    width: 60%;
-    min-width: 300px;
-    background-color: #8d5e00;
-    padding: 50px;
-    border-radius: 15px;
+	display: flex;
+	gap: 30px;
+	width: 60%;
+	min-width: 300px;
+	background-color: #8d5e00;
+	padding: 50px;
+	border-radius: 15px;
 }
 
 .empleados-left {
-    width: 40%;
+	width: 40%;
 }
 
 .empleados-right {
-    width: 60%;
+	width: 60%;
 }
 
 .usuarios-form {
-    width: 40%;
-    min-width: 300px;
-    background-color: #645841;
-    padding: 50px;
-    border-radius: 15px;
+	width: 40%;
+	min-width: 300px;
+	background-color: #645841;
+	padding: 50px;
+	border-radius: 15px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
 }
 
 .form-group input[type="text"],
@@ -91,101 +91,101 @@ form {
 .form-group input[type="number"],
 .form-group input[type="password"],
 .form-group input[type="checkbox"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 .form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
 .form-group select {
-    appearance: none; /* Remove default dropdown arrow */
-    background-color: #fff;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23999" d="M2 0L0 2h4zM2 5L0 3h4z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 12px 12px;
-    padding-right: 30px; /* Add padding to accommodate dropdown arrow */
-    font-size: 16px;
-    color: #333;
+	appearance: none; /* Remove default dropdown arrow */
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23999" d="M2 0L0 2h4zM2 5L0 3h4z"/></svg>');
+	background-repeat: no-repeat;
+	background-position: right 10px center;
+	background-size: 12px 12px;
+	padding-right: 30px; /* Add padding to accommodate dropdown arrow */
+	font-size: 16px;
+	color: #333;
 }
 
 .form-group select:focus {
-    border-color: #4CAF50; /* Border color when focused */
-    outline: none; /* Remove default outline */
+	border-color: #4caf50; /* Border color when focused */
+	outline: none; /* Remove default outline */
 }
 
 .form-group input[type="checkbox"] {
-    width: auto; /* Ajustar el ancho automáticamente */
-    margin-right: 5px; /* Espacio entre el checkbox y la etiqueta */
+	width: auto; /* Ajustar el ancho automáticamente */
+	margin-right: 5px; /* Espacio entre el checkbox y la etiqueta */
 }
 
 button {
-    width: 50%;
-    padding: 10px;
-    margin-top: 30px;
-    border: none;
-    border-radius: 4px;
-    background-color: #3498db;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+	width: 50%;
+	padding: 10px;
+	margin-top: 30px;
+	border: none;
+	border-radius: 4px;
+	background-color: #3498db;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #2980b9;
+	background-color: #2980b9;
 }
 
 .table-container {
-    width: 90%;
-    max-width: 1000px;
-    height: 300px;
-    margin: 0 20px;
-    overflow-x: auto; /* Para manejar tablas anchas en pantallas pequeñas */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    margin: 30px;
+	width: 90%;
+	max-width: 1000px;
+	height: 300px;
+	margin: 0 20px;
+	overflow-x: auto; /* Para manejar tablas anchas en pantallas pequeñas */
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	margin: 30px;
 }
 
 .styled-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 18px;
-    text-align: left;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 18px;
+	text-align: left;
 }
 
 .styled-table thead tr {
-    background-color: #3498db;
-    color: #ffffff;
-    text-align: left;
+	background-color: #3498db;
+	color: #ffffff;
+	text-align: left;
 }
 
 .styled-table th,
 .styled-table td {
-    padding: 12px 15px;
+	padding: 12px 15px;
 }
 
 .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
+	border-bottom: 1px solid #dddddd;
 }
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+	background-color: #f3f3f3;
 }
 
 .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #3498db;
+	border-bottom: 2px solid #3498db;
 }
 
 .styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #3498db;
+	font-weight: bold;
+	color: #3498db;
 }

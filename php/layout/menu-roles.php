@@ -2,9 +2,9 @@
 // Archivo: list_productos.php
 
 // Incluir archivo de conexión
-include('../config/connection.php');
+include ('../config/connection.php');
 
-// Consulta para obtener datos de la tabla Producto
+// Consulta para obtener datos de la tabla Rol
 $query = "SELECT id, descripcion FROM Rol";
 $result = $conn->query($query);
 
@@ -21,7 +21,9 @@ $result = $conn->query($query);
   <link rel="stylesheet" href="../../css/menu-roles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -29,7 +31,7 @@ $result = $conn->query($query);
   <section>
     <h2>Registro de Roles</h2>
     <div class="productos-container">
-      <form action="submit_product.php" method="POST">
+      <form action="../controllers/rolesCtrl/registrarCtrl.php" method="POST">
         <div class="form-group">
           <label for="rol">Descripcion</label>
           <input type="text" id="rol" name="rol" required>
@@ -54,7 +56,7 @@ $result = $conn->query($query);
               echo "<tr>";
               echo "<td>" . $row['id'] . "</td>";
               echo "<td>" . $row['descripcion'] . "</td>";
-              echo "<td><a class='btn-editar' href='../layout/editar-producto.php?id=" . $row['id'] . "'>✏️</a></td>";
+              echo "<td><a class='btn-editar' href='../layout/editar-roles.php?id=" . $row['id'] . "'>✏️</a></td>";
               echo "</tr>";
             }
           } else {

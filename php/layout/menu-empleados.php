@@ -1,11 +1,27 @@
 <?php
-// Archivo: list_personal.php
-
 // Incluir archivo de conexión
 include ('../config/connection.php');
 
-// Consulta para obtener datos de la tabla Personal
-$query = "SELECT * FROM Personal";
+// Consulta para obtener datos de la tabla Personal, incluyendo las uniones necesarias para rol y turno
+$query = "
+SELECT 
+    p.id_personal, 
+    p.nombre, 
+    p.apellidos, 
+    p.dni, 
+    p.correo, 
+    p.fecha_ingreso, 
+    p.sueldo, 
+    r.descripcion AS rol, 
+    t.Entrada, 
+    t.Salida
+FROM 
+    Personal p
+INNER JOIN 
+    Rol r ON p.id_rol = r.id
+INNER JOIN 
+    Turno t ON p.id_turno = t.id";
+
 $result = $conn->query($query);
 
 // Consulta para obtener roles desde la base de datos
@@ -19,7 +35,6 @@ $result_turnos = $conn->query($query_turnos);
 
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,9 +75,7 @@ $result_turnos = $conn->query($query_turnos);
                   <select id="rol" name="rol" required>
                     <option value="">Seleccione un rol</option>
                     <?php
-                    // Verificar si hay resultados en la consulta de roles
                     if ($result_roles->num_rows > 0) {
-                      // Recorrer y mostrar los datos de roles
                       while ($row_rol = $result_roles->fetch_assoc()) {
                         echo "<option value='" . $row_rol['id'] . "'>" . $row_rol['descripcion'] . "</option>";
                       }
@@ -89,9 +102,7 @@ $result_turnos = $conn->query($query_turnos);
                   <select id="turno" name="turno" required>
                     <option value="">Seleccione un turno</option>
                     <?php
-                    // Verificar si hay resultados en la consulta de turnos
                     if ($result_turnos->num_rows > 0) {
-                      // Recorrer y mostrar los datos de turnos
                       while ($row_turno = $result_turnos->fetch_assoc()) {
                         echo "<option value='" . $row_turno['id'] . "'>" . $row_turno['Entrada'] . " - " . $row_turno['Salida'] . "</option>";
                       }
@@ -129,9 +140,13 @@ $result_turnos = $conn->query($query_turnos);
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
+            <th>Nombre Completo</th>
+            <th>DNI</th>
             <th>Correo Electrónico</th>
-            <th>Fecha de Registro</th>
+            <th>Fecha de Ingreso</th>
+            <th>Rol</th>
+            <th>Turno</th>
+            <th>Sueldo</th>
             <th>Opciones</th>
           </tr>
         </thead>
@@ -143,14 +158,18 @@ $result_turnos = $conn->query($query_turnos);
             while ($row = $result->fetch_assoc()) {
               echo "<tr>";
               echo "<td>" . $row['id_personal'] . "</td>";
-              echo "<td>" . $row['nombre'] . "</td>";
+              echo "<td>" . $row['nombre'] . " " . $row['apellidos'] . "</td>";
+              echo "<td>" . $row['dni'] . "</td>";
               echo "<td>" . $row['correo'] . "</td>";
               echo "<td>" . $row['fecha_ingreso'] . "</td>";
+              echo "<td>" . $row['rol'] . "</td>";
+              echo "<td>" . $row['Entrada'] . " - " . $row['Salida'] . "</td>";
+              echo "<td>" . $row['sueldo'] . "</td>";
               echo "<td><a class='btn-editar' href='../layout/editar-empleados.php?id=" . $row['id_personal'] . "'>✏️</a></td>";
               echo "</tr>";
             }
           } else {
-            echo "<tr><td colspan='5'>No hay datos disponibles</td></tr>";
+            echo "<tr><td colspan='9'>No hay datos disponibles</td></tr>";
           }
           // Cerrar conexión
           $conn->close();
@@ -160,5 +179,4 @@ $result_turnos = $conn->query($query_turnos);
     </div>
   </section>
 </body>
-
 </html>

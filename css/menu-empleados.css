@@ -147,7 +147,7 @@ button:hover {
 }
 
 .table-container {
-	width: 90%;
+	width: 95%;
 	max-width: 1000px;
 	height: 300px;
 	margin: 0 20px;
@@ -159,7 +159,7 @@ button:hover {
 .styled-table {
 	width: 100%;
 	border-collapse: collapse;
-	font-size: 18px;
+	font-size: 14px; /* Tamaño de fuente reducido */
 	text-align: left;
 }
 

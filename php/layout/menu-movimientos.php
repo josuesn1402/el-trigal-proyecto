@@ -88,7 +88,10 @@ $result_empleados = $conn->query($query_empleados);
         </div>
         <div class="form-group">
           <label for="estado">Estado</label>
-          <input type="text" id="estado" name="estado" required>
+          <select id="estado" name="estado" required>
+            <option value="BUENO">BUENO</option>
+            <option value="DEFECTUOSO">DEFECTUOSO</option>
+          </select>
         </div>
         <div class="form-group">
           <label for="fecha">Fecha</label>

@@ -1,7 +1,7 @@
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
+	min-height: 100vh;
     background: #ffeecc;
     font-family: "Roboto", sans-serif;
     font-weight: 300;
@@ -11,7 +11,7 @@ body {
 section {
     padding: 20px;
     margin-left: 200px;
-    height: 100vh;
+	min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

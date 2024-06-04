@@ -1,69 +1,68 @@
 body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background: #ffeecc;
-    font-family: "Roboto", sans-serif;
-    font-weight: 300;
-    font-style: normal;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	background: #ffeecc;
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+	font-style: normal;
 }
 
 section {
-    margin-left: 200px;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	margin-left: 200px;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .inicio-container {
-    background-color: #8d5e00;
-    padding: 50px;
-    border-radius: 15px;
-    color: white;
-    margin: 50px;
+	background-color: #8d5e00;
+	padding: 50px;
+	border-radius: 15px;
+	color: white;
+	margin: 50px;
 }
 
 h1 {
-    font-weight: 500;
+	font-weight: 500;
 }
 
 span {
-    background: linear-gradient(to right, #ff761b, #feb47b);
-    background-clip: text;
-    color: transparent;
-    font-weight: 700;
-    font-size: 30px;
+	background: linear-gradient(to right, #ff761b, #feb47b);
+	background-clip: text;
+	color: transparent;
+	font-weight: 700;
+	font-size: 30px;
 }
 
 .inicio-container p {
-    font-weight: 400;
-    margin: 10px 0;
+	font-weight: 400;
+	margin: 10px 0;
 }
 
 .lista-documentacion {
-    list-style-type: none; /* Quita los estilos predeterminados de la lista */
-    padding-left: 0; /* Elimina el relleno a la izquierda */
-    color: black;
+	list-style-type: none; /* Quita los estilos predeterminados de la lista */
+	padding-left: 0; /* Elimina el relleno a la izquierda */
+	color: black;
 }
 
 .lista-documentacion li {
-    margin-bottom: 8px; /* Espacio entre elementos de la lista */
-    background-color: #feb47b; /* Color de fondo */
-    padding: 12px 16px; /* Relleno interior */
-    border-left: 4px solid #d48e01; /* Bordes a la izquierda */
-    font-weight: 500;
+	margin-bottom: 8px; /* Espacio entre elementos de la lista */
+	background-color: #feb47b; /* Color de fondo */
+	padding: 12px 16px; /* Relleno interior */
+	border-left: 4px solid #d48e01; /* Bordes a la izquierda */
+	font-weight: 500;
 }
 
 .lista-documentacion li:last-child {
-    margin-bottom: 0; /* Elimina el espacio inferior del último elemento */
+	margin-bottom: 0; /* Elimina el espacio inferior del último elemento */
 }
 
 .lista-documentacion li::before {
-    content: "\2022"; /* Agrega un punto antes de cada elemento */
-    color: #d48e01; /* Color del punto */
-    display: inline-block; /* Muestra el punto como bloque */
-    width: 1em; /* Ancho del punto */
-    margin-left: -1em; /* Desplaza el punto hacia la izquierda */
+	content: "\2022"; /* Agrega un punto antes de cada elemento */
+	color: #d48e01; /* Color del punto */
+	display: inline-block; /* Muestra el punto como bloque */
+	width: 1em; /* Ancho del punto */
+	margin-left: -1em; /* Desplaza el punto hacia la izquierda */
 }
-

@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "root2024";
 $database = "Almacenamiento";
 
 // Crear la conexión

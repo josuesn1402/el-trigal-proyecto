@@ -2,14 +2,14 @@
 // Archivo: list_movimientos.php
 
 // Incluir archivo de conexión
-include('../config/connection.php');
+include ('../config/connection.php');
 
 // Consulta para obtener datos de la tabla Movimiento con los nombres correspondientes
 $query = "
 SELECT
   Movimiento.id_recepcion,
   Producto.nombre_producto,
-  Personal.nombre AS nombre_personal,
+  CONCAT(Personal.nombre, ' ', Personal.apellidos) AS nombre_personal,
   Movimiento.tipo_movimiento,
   Movimiento.estado,
   Movimiento.fecha,
@@ -20,6 +20,14 @@ JOIN Producto ON Movimiento.id_producto = Producto.id_producto
 JOIN Personal ON Movimiento.id_personal = Personal.id_personal
 ";
 $result = $conn->query($query);
+
+// Consulta para obtener productos desde la base de datos
+$query_productos = "SELECT id_producto, nombre_producto FROM Producto";
+$result_productos = $conn->query($query_productos);
+
+// Consulta para obtener empleados desde la base de datos
+$query_empleados = "SELECT id_personal, CONCAT(nombre, ' ', apellidos) AS nombre_completo FROM Personal";
+$result_empleados = $conn->query($query_empleados);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +41,9 @@ $result = $conn->query($query);
   <link rel="stylesheet" href="../../css/menu-movimientos.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
@@ -41,40 +51,52 @@ $result = $conn->query($query);
   <section>
     <h2>Registro de Movimientos</h2>
     <div class="productos-container">
-      <form action="submit_product.php" method="POST">
+      <form action="../controllers/movimientosCtrl/registrarCtrl.php" method="POST">
         <div class="form-group">
-          <label for="departamento">Turno</label>
-          <select id="departamento" name="departamento" required>
+          <label for="producto">Producto</label>
+          <select id="producto" name="producto" required>
             <option value="">Seleccione un producto</option>
-            <option value="ventas">Ventas</option>
-            <option value="marketing">Marketing</option>
-            <option value="rrhh">Recursos Humanos</option>
-            <option value="it">IT</option>
-            <option value="finanzas">Finanzas</option>
+            <?php
+            if ($result_productos->num_rows > 0) {
+              while ($row_producto = $result_productos->fetch_assoc()) {
+                echo "<option value='" . $row_producto['id_producto'] . "'>" . $row_producto['nombre_producto'] . "</option>";
+              }
+            }
+            ?>
           </select>
         </div>
         <div class="form-group">
-          <label for="departamento">Turno</label>
-          <select id="departamento" name="departamento" required>
+          <label for="empleado">Empleado</label>
+          <select id="empleado" name="empleado" required>
             <option value="">Seleccione un empleado</option>
-            <option value="ventas">Ventas</option>
-            <option value="marketing">Marketing</option>
-            <option value="rrhh">Recursos Humanos</option>
-            <option value="it">IT</option>
-            <option value="finanzas">Finanzas</option>
+            <?php
+            if ($result_empleados->num_rows > 0) {
+              while ($row_empleado = $result_empleados->fetch_assoc()) {
+                echo "<option value='" . $row_empleado['id_personal'] . "'>" . $row_empleado['nombre_completo'] . "</option>";
+              }
+            }
+            ?>
           </select>
         </div>
         <div class="form-group">
-          <label for="name">Tipo Movimiento</label>
-          <input type="text" id="name" name="name" required>
+          <label for="tipo_movimiento">Tipo Movimiento</label>
+          <select id="tipo_movimiento" name="tipo_movimiento" required>
+            <option value="">Seleccione el tipo de movimiento</option>
+            <option value="ENTRADA">ENTRADA</option>
+            <option value="SALIDA">SALIDA</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <input type="text" id="estado" name="estado" required>
         </div>
         <div class="form-group">
           <label for="fecha">Fecha</label>
           <input type="date" id="fecha" name="fecha" required>
         </div>
         <div class="form-group">
-          <label for="price">Descuento</label>
-          <input type="number" id="price" name="price" min="0.01" step="0.01" required>
+          <label for="descuento">Descuento</label>
+          <input type="number" id="descuento" name="descuento" min="0.01" step="0.01" required>
         </div>
         <button type="submit">Guardar Movimiento</button>
       </form>

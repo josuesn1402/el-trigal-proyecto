@@ -31,6 +31,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     u.id AS id_usuario,
     u.username AS nombre_usuario,
     u.contrasenia,
+    u.correo AS u_correo,
     u.admin
   FROM
     Personal p
@@ -46,7 +47,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     // Verificar si se encontraron resultados
     if ($stmt->num_rows == 1) {
       // Vincular variables a los resultados de la consulta
-      $stmt->bind_result($id_personal, $nombre, $apellido, $dni, $correo, $fecha_ingreso, $sueldo, $id_rol, $id_turno, $id_usuario, $nombre_usuario, $contrasenia, $admin);
+      $stmt->bind_result($id_personal, $nombre, $apellido, $dni, $correo, $fecha_ingreso, $sueldo, $id_rol, $id_turno, $id_usuario, $nombre_usuario, $contrasenia, $u_correo, $admin);
       $stmt->fetch();
     } else {
       // No se encontró el empleado con el ID proporcionado
@@ -104,25 +105,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                   <input type="text" id="nombre" name="nombre" value="<?php echo $nombre; ?>" required>
                 </div>
                 <div class="form-group">
-                  <label for="apellido">Apellido</label>
-                  <input type="text" id="apellido" name="apellido" value="<?php echo $apellido; ?>" required>
-                </div>
-                <div class="form-group">
                   <label for="dni">DNI</label>
                   <input type="text" id="dni" name="dni" value="<?php echo $dni; ?>" required>
-                </div>
-                <div class="form-group">
-                  <label for="correo">Correo</label>
-                  <input type="email" id="correo" name="correo" value="<?php echo $correo; ?>" required>
                 </div>
                 <div class="form-group">
                   <label for="fecha_ingreso">Fecha Ingreso</label>
                   <input type="date" id="fecha_ingreso" name="fecha_ingreso" value="<?php echo $fecha_ingreso; ?>"
                     required>
-                </div>
-                <div class="form-group">
-                  <label for="sueldo">Sueldo</label>
-                  <input type="number" id="sueldo" name="sueldo" value="<?php echo $sueldo; ?>" required>
                 </div>
                 <div class="form-group">
                   <label for="id_rol">Rol</label>
@@ -144,6 +133,18 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
               </div>
               <div class="empleados-right">
                 <div class="form-group">
+                  <label for="apellido">Apellido</label>
+                  <input type="text" id="apellido" name="apellido" value="<?php echo $apellido; ?>" required>
+                </div>
+                <div class="form-group">
+                  <label for="correo">Correo</label>
+                  <input type="email" id="correo" name="correo" value="<?php echo $correo; ?>" required>
+                </div>
+                <div class="form-group">
+                  <label for="sueldo">Sueldo</label>
+                  <input type="number" id="sueldo" name="sueldo" value="<?php echo $sueldo; ?>" required>
+                </div>
+                <div class="form-group">
                   <label for="id_turno">Turno</label>
                   <select id="id_turno" name="id_turno" required>
                     <option value="">Seleccione un turno</option>
@@ -163,27 +164,27 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
               </div>
             </div>
             <div class="usuarios-form">
+              <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
               <div class="form-group">
-                <label for="id_usuario">Usuario</label>
-                <input type="text" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
+                <label for="cor">Correo</label>
+                <input type="email" id="cor" name="cor" value="<?php echo $u_correo; ?>" required>
               </div>
               <div class="form-group">
-                <label for="nombre_usuario">Nombre de Usuario</label>
+                <label for="use">Usuario</label>
                 <input type="text" id="nombre_usuario" name="nombre_usuario" value="<?php echo $nombre_usuario; ?>"
                   required>
               </div>
               <div class="form-group">
-                <label for="contrasena">Contraseña</label>
+                <label for="con">Contraseña</label>
                 <input type="password" id="contrasena" name="contrasena" value="<?php echo $contrasenia; ?>" required>
               </div>
               <div class="form-group">
-                <label for="admin">¿Es administrador?</label>
-                <input type="checkbox" id="admin" name="admin" <?php if ($admin)
-                  echo 'checked'; ?>>
+                <label for="admin"><input type="checkbox" id="admin" name="admin" <?php if ($admin)
+                  echo 'checked'; ?>> ¿Es administrador?</label>
               </div>
             </div>
-            <button type="submit">Actualizar Empleado</button>
           </div>
+          <button type="submit">Actualizar Empleado</button>
         </form>
       </div>
     </div>

@@ -95,7 +95,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     <div class="empleados-container">
       <h2>Editar Empleado</h2>
       <div class="empleados-form">
-        <form action="../controllers/empleadosCtrl/modificaCtrl.php" method="POST">
+        <form action="../controllers/empledosCtrl/modificaCtrl.php" method="POST">
           <div class="form-container">
             <div class="empleados">
               <div class="empleados-left">
@@ -167,7 +167,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
               <input type="hidden" id="id_usuario" name="id_usuario" value="<?php echo $id_usuario; ?>" required>
               <div class="form-group">
                 <label for="cor">Correo</label>
-                <input type="email" id="cor" name="cor" value="<?php echo $u_correo; ?>" required>
+                <input type="email" id="u_correo" name="u_correo" value="<?php echo $u_correo; ?>" required>
               </div>
               <div class="form-group">
                 <label for="use">Usuario</label>

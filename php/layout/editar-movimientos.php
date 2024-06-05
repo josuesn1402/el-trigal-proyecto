@@ -10,7 +10,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
   $id_movimiento = $_GET['id'];
 
   // Consulta para obtener los datos del movimiento específico
-  $query_movimiento = "SELECT * FROM Movimiento WHERE id_recepcion = $id_movimiento";
+  $query_movimiento = "SELECT M.*, P.cantidad AS cantidad_disponible 
+                        FROM Movimiento M 
+                        INNER JOIN Producto P ON M.id_producto = P.id_producto 
+                        WHERE id_recepcion = $id_movimiento";
   $result_movimiento = $conn->query($query_movimiento);
 
   // Verificar si se encontró el movimiento
@@ -58,7 +61,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
   <section>
     <h2>Editar Movimientos</h2>
     <div class="productos-container">
-      <form action="../controllers/movimientosCtrl/modificaCtrl.php" method="POST">
+      <form id="editMovimientoForm" action="../controllers/movimientosCtrl/modificaCtrl.php" method="POST">
         <input type="hidden" id="id" name="id" value="<?php echo $row_movimiento['id_recepcion']; ?>" required>
         <div class="form-group">
           <label for="producto">Producto</label>
@@ -75,6 +78,11 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
           </select>
         </div>
         <div class="form-group">
+          <label for="cantidad_producto">Cantidad disponible del producto</label>
+          <input type="number" id="cantidad_producto" name="cantidad_producto" min="1" step="1"
+            value="<?php echo $row_movimiento['cantidad_disponible']; ?>" disabled>
+        </div>
+        <div class="form-group">
           <label for="empleado">Empleado</label>
           <select id="empleado" name="empleado" required>
             <option value="">Seleccione un empleado</option>
@@ -88,6 +96,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             ?>
           </select>
         </div>
+        <input type="hidden" id="tipo_movimiento_original" name="tipo_movimiento_original"
+          value="<?php echo $row_movimiento['tipo_movimiento']; ?>" required>
         <div class="form-group">
           <label for="tipo_movimiento">Tipo de Movimiento</label>
           <select id="tipo_movimiento" name="tipo_movimiento" required>
@@ -100,6 +110,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             </option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input type="number" id="cantidad" name="cantidad" value="<?php echo $row_movimiento['cantidad']; ?>" min="1"
+            step="1" required>
+        </div>
+        <input type="hidden" id="cantidad_mod_original" name="cantidad_mod_original"
+          value="<?php echo $row_movimiento['cantidad']; ?>" min="1" step="1" required>
         <div class="form-group">
           <label for="estado">Estado</label>
           <select id="estado" name="estado" required>
@@ -116,13 +133,56 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         </div>
         <div class="form-group">
           <label for="price">Descuento</label>
-          <input type="number" id="price" name="price" value="<?php echo $row_movimiento['descuento']; ?>" min="0.01"
+          <input type="number" id="price" name="price" value="<?php echo $row_movimiento['descuento']; ?>" min="0"
             step="0.01" required>
         </div>
-        <button type="submit">Actualizar Movimiento</button>
+        <button type="submit" onclick="validarEdicion()">Actualizar Movimiento</button>
       </form>
     </div>
   </section>
+
+  <script>
+    function validarCantidad() {
+      var tipoMovimiento = document.getElementById('tipo_movimiento').value;
+
+      // Si el tipo de movimiento es "SALIDA", entonces valida la cantidad disponible
+      if (tipoMovimiento === 'SALIDA') {
+        var cantidad = document.getElementById('cantidad').value;
+        var cantidadDisponible = document.getElementById('cantidad_producto').value;
+
+        if (cantidad === '') {
+          alert('Por favor, ingresa una cantidad.');
+          return false;
+        }
+
+        if (parseInt(cantidad) > parseInt(cantidadDisponible)) {
+          alert('La cantidad seleccionada es mayor que la cantidad disponible del producto.');
+          return false;
+        }
+      }
+
+      return true; // Si todo está bien o si el tipo de movimiento es "ENTRADA", retorna true para enviar el formulario
+    }
+
+    function mostrarCantidadDisponible() {
+      var productoSeleccionado = document.getElementById('producto').value;
+
+      // Realizar una solicitud AJAX para obtener la cantidad disponible del producto
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var cantidadDisponible = xhr.responseText;
+            document.getElementById('cantidad_producto').value = cantidadDisponible;
+          } else {
+            alert('No se pudo enviar la solicitud. Inténtalo de nuevo más tarde.');
+          }
+        }
+      };
+      xhr.open('GET', '../controllers/movimientosCtrl/obtenerCantidadDisponible.php?producto=' + productoSeleccionado, true);
+      xhr.send();
+    }
+  </script>
 </body>
 
 </html>

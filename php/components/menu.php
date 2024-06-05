@@ -11,5 +11,6 @@
     <li><a href="../layout/menu-movimientos.php"><img src="../../assets/svg/move-menu.svg" alt=""> Movimientos</a></li>
     <li><a href="../layout/menu-turnos.php"><img src="../../assets/svg/shift-menu.svg" alt=""> Turnos</a></li>
     <li><a href="../layout/menu-roles.php"><img src="../../assets/svg/rol-menu.svg" alt=""> Rol</a></li>
+    <li><a href="../../index.php"><img src="../../assets/svg/back-door.svg" alt="">Salir</a></li>
   </ul>
 </aside>

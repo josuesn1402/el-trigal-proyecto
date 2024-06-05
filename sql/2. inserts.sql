@@ -2,8 +2,8 @@ USE Almacenamiento;
 
 -- Insertar datos en la tabla Usuario
 INSERT INTO Usuario (username, contrasenia, correo, admin)
-VALUES ('usuario1', 'contrasenia1', 'usuario1@example.com', 0),
-       ('usuario2', 'contrasenia2', 'usuario2@example.com', 1);
+VALUES ('user1', '1234', 'usuario1@example.com', 0),
+       ('user2', '1234', 'usuario2@example.com', 1);
 
 -- Insertar datos en la tabla Producto
 INSERT INTO Producto (nombre_producto, cantidad, descripcion, estado, Precio)
